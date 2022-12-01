@@ -35,22 +35,26 @@ def plot_yields_and_spreads(
 
     fig, axes = plt.subplots(1, 2, figsize=(8, 5), width_ratios=[9, 4], dpi=100)
 
-    axes[0].plot(y_wc_m, label=r"exact $\alpha=50\%$", color="tab:green")
-    axes[0].plot(y_hat_wc_m, label=r"linearized $\alpha=50\%$", color="tab:green", linestyle="--")
-    axes[0].plot(y_wc_e, label=r"exact $\alpha=99\%$", color="tab:orange")
-    axes[0].plot(y_hat_wc_e, label=r"linearized $\alpha=99\%$", color="tab:orange", linestyle="--")
-    axes[0].plot(y_nominal, label="nominal", color="tab:blue")
-    axes[0].set_ylabel("Yield")
+    axes[0].plot(y_wc_m * 2, label=r"exact $\alpha=50\%$", color="tab:green")
+    axes[0].plot(
+        y_hat_wc_m * 2, label=r"linearized $\alpha=50\%$", color="tab:green", linestyle="--"
+    )
+    axes[0].plot(y_wc_e * 2, label=r"exact $\alpha=99\%$", color="tab:orange")
+    axes[0].plot(
+        y_hat_wc_e * 2, label=r"linearized $\alpha=99\%$", color="tab:orange", linestyle="--"
+    )
+    axes[0].plot(y_nominal * 2, label="nominal", color="tab:blue")
+    axes[0].set_ylabel("Annualized yield")
     axes[0].set_xlabel("Period")
     axes[0].yaxis.set_major_formatter(FuncFormatter("{:.1%}".format))
 
     for i in range(4):
         bond_range = list(range(n))[i * 5 : (i + 1) * 5]
-        axes[1].plot(bond_range, s_wc_m[bond_range], color="tab:green")
-        axes[1].plot(bond_range, s_hat_wc_m[bond_range], color="tab:green", linestyle="--")
-        axes[1].plot(bond_range, s_wc_e[bond_range], color="tab:orange")
-        axes[1].plot(bond_range, s_hat_wc_e[bond_range], color="tab:orange", linestyle="--")
-        axes[1].plot(bond_range, s_nominal[bond_range], color="tab:blue")
+        axes[1].plot(bond_range, s_wc_m[bond_range] * 2, color="tab:green")
+        axes[1].plot(bond_range, s_hat_wc_m[bond_range] * 2, color="tab:green", linestyle="--")
+        axes[1].plot(bond_range, s_wc_e[bond_range] * 2, color="tab:orange")
+        axes[1].plot(bond_range, s_hat_wc_e[bond_range] * 2, color="tab:orange", linestyle="--")
+        axes[1].plot(bond_range, s_nominal[bond_range] * 2, color="tab:blue")
 
     axes[1].set_ylabel("Spread")
     axes[1].set_xlabel("Rating")
@@ -78,9 +82,9 @@ def plot_historic(
 
     fig, axes = plt.subplots(1, 2, figsize=(8, 4), width_ratios=[9, 4], dpi=100)
 
-    axes[0].plot(mean_yields, label=r"$\mu^{\mathrm{hist}}$", color="darkgrey", linewidth=lw)
-    axes[0].plot(y_nominal, label="nominal yields", color="tab:blue", linewidth=lw)
-    axes[0].set_ylabel("Yield")
+    axes[0].plot(mean_yields * 2, label=r"$\mu^{\mathrm{hist}}$", color="darkgrey", linewidth=lw)
+    axes[0].plot(y_nominal * 2, label="nominal yields", color="tab:blue", linewidth=lw)
+    axes[0].set_ylabel("Annualized yield")
     axes[0].set_xlabel("Period")
     axes[0].yaxis.set_major_formatter(FuncFormatter("{:.1%}".format))
     axes[0].legend()
@@ -89,10 +93,12 @@ def plot_historic(
         bond_range = list(range(n))[i * 5 : (i + 1) * 5]
         label = r"$\mu^{\mathrm{hist}}$" if i == 0 else None
         axes[1].plot(
-            bond_range, mean_spreads[bond_range], color="darkgrey", label=label, linewidth=lw
+            bond_range, mean_spreads[bond_range] * 2, color="darkgrey", label=label, linewidth=lw
         )
         label = "nominal\nspreads" if i == 0 else None
-        axes[1].plot(bond_range, s_nominal[bond_range], color="tab:blue", label=label, linewidth=lw)
+        axes[1].plot(
+            bond_range, s_nominal[bond_range] * 2, color="tab:blue", label=label, linewidth=lw
+        )
 
     axes[1].set_ylabel("Spread")
     axes[1].set_xlabel("Rating")
