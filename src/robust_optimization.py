@@ -5,9 +5,8 @@ from collections.abc import Iterable
 from dataclasses import dataclass
 from typing import Any, Callable
 
-import numpy as np
-
 import cvxpy as cp
+import numpy as np
 from cvxpy.constraints.constraint import Constraint
 from dspp import inner
 

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import cvxpy as cp
+import dspp
 import matplotlib as mpl
 import matplotlib.colors as colors
 import matplotlib.pyplot as plt
@@ -7,12 +9,10 @@ import numpy as np
 import pandas as pd
 import scipy.sparse as sp
 import seaborn as sns
+from cvxpy.constraints.constraint import Constraint
 from matplotlib.ticker import FuncFormatter
 from scipy.stats import chi2
 
-import cvxpy as cp
-import dspp
-from cvxpy.constraints.constraint import Constraint
 from robust_optimization import UncertaintySet, get_Delta_lin, run_worst_case_analysis
 
 

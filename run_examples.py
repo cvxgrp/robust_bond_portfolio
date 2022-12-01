@@ -1,8 +1,8 @@
 from functools import partial
 
+import cvxpy as cp
 import numpy as np
 
-import cvxpy as cp
 from src.full_example import (
     in_ellipse,
     plot_heatmap,
