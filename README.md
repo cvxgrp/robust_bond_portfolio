@@ -33,7 +33,6 @@ If you want to reference our paper in your research, please consider citing us b
   doi = {10.48550/ARXIV.2212.02570},
   title = {Robust Bond Portfolio Construction via Convex-Concave Saddle Point Optimization},
   url = {https://arxiv.org/abs/2212.02570},
-  year = {2022},
-  month = {12}
+  year = {2022}
 }
 ```
