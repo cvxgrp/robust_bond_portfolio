@@ -8,7 +8,7 @@ from typing import Any, Callable
 import cvxpy as cp
 import numpy as np
 from cvxpy.constraints.constraint import Constraint
-from dspp import inner
+from dsp import inner
 
 
 @dataclass
