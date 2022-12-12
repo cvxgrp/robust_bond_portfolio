@@ -18,7 +18,7 @@ python run_examples.py
 which will show all figures and print the numerical results to the terminal.
 
 > **Note**
-> The portfolio construction examples require the `dsp` package, which is not yet released. 
+> The portfolio construction examples require the `dsp` package, which is not yet released.
 > Futher, the examples require the Mosek solver (academic licenses are available).
 
 ## Code snippets
