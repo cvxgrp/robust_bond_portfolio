@@ -12,6 +12,13 @@ from src.full_example import (
 )
 from src.robust_optimization import UncertaintySet
 
+try:
+    import dsp  # noqa: F401
+
+    RUN_CONSTRUCTION = True
+except ImportError:
+    RUN_CONSTRUCTION = False
+
 
 def run() -> None:
     # load data
@@ -60,9 +67,12 @@ def run() -> None:
         plot=True,
     )
 
-    portfolio_construction(
-        Cash_flows, prices, s_tilde, target_weights, y_tilde, U_extreme, U_modest, ys_nominal
-    )
+    if RUN_CONSTRUCTION:
+        portfolio_construction(
+            Cash_flows, prices, s_tilde, target_weights, y_tilde, U_extreme, U_modest, ys_nominal
+        )
+    else:
+        print("Skipping portfolio construction example, requires dsp package to be installed.")
 
 
 if __name__ == "__main__":

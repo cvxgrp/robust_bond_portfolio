@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import cvxpy as cp
-import dsp
 import matplotlib as mpl
 import matplotlib.colors as colors
 import matplotlib.pyplot as plt
@@ -269,6 +268,7 @@ def run_portfolio_construction(
     linearized: bool = False,
     ys_nominal: tuple[np.ndarray, np.ndarray] = None,
 ) -> pd.DataFrame:
+    import dsp
 
     n, T = Cash_flows.shape
     h = cp.Variable(n, name="h")
@@ -303,7 +303,8 @@ def run_portfolio_construction(
             dsp.MinimizeMaximize(phi - lambda_val * Delta),
             weight_constraints + exponent_constraints,
         )
-        saddle_problem.solve(solver=cp.MOSEK, eps=1e-2)
+        saddle_problem.solve(solver=cp.MOSEK)
+        assert saddle_problem.status == cp.OPTIMAL
 
         print(f"{lambda_val:.2f}, " f"{phi.value=:.2f}")
         res.append(

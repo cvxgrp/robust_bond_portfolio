@@ -3,12 +3,14 @@ from __future__ import annotations
 import itertools
 from collections.abc import Iterable
 from dataclasses import dataclass
-from typing import Any, Callable
+from typing import TYPE_CHECKING, Any, Callable
 
 import cvxpy as cp
 import numpy as np
 from cvxpy.constraints.constraint import Constraint
-from dsp import inner
+
+if TYPE_CHECKING:
+    from dsp import inner
 
 
 @dataclass
@@ -93,6 +95,7 @@ def exact_worst_case_analysis(
     obj = cp.Minimize(Delta_y_tilde_s_tilde)
     prob = cp.Problem(obj, U.contains((y_tilde, s_tilde)))
     prob.solve(solver=cp.MOSEK)
+    assert prob.status == cp.OPTIMAL
     return prob.value, y_tilde.value, s_tilde.value
 
 
@@ -109,7 +112,8 @@ def linearized_worst_case_analysis(
     Delta_hat_y_tilde_s_tilde = get_Delta_lin(h, y_tilde, s_tilde, C, y_nominal, s_nominal, p @ h)
     obj = cp.Minimize(Delta_hat_y_tilde_s_tilde)
     prob = cp.Problem(obj, U.contains((y_tilde, s_tilde)))
-    prob.solve(solver=cp.ECOS)
+    prob.solve(solver=cp.MOSEK)
+    assert prob.status == cp.OPTIMAL
     return prob.value, y_tilde.value, s_tilde.value
 
 
@@ -155,6 +159,8 @@ def get_Delta_lin(
     D_spr = cp.hstack(tmp)
 
     if construction:
+        from dsp import inner
+
         return inner(y_tilde - y_nominal, D_yld) + inner(s_tilde - s_nominal, D_spr)
     else:
         return D_yld.value @ (y_tilde - y_nominal) + D_spr.value @ (s_tilde - s_nominal)
