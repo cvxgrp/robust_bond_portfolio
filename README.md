@@ -18,8 +18,7 @@ python run_examples.py
 which will show all figures and print the numerical results to the terminal.
 
 > **Note**
-> The portfolio construction examples require the `dsp` package, which is available [here](https://github.com/cvxgrp/dsp).
-> Futher, the examples require the Mosek solver (academic licenses are available).
+> The examples require the Mosek solver (academic licenses are available).
 
 ## Code snippets
 All code snippets presented in the paper are maintained as test cases is `tests/test_snippets.py` and can be copied from there.

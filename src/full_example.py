@@ -299,7 +299,7 @@ def run_portfolio_construction(
             Delta = get_Delta_lin(
                 h, y_tilde, s_tilde, Cash_flows, *ys_nominal, B, construction=True
             )
-        saddle_problem = dsp.SaddleProblem(
+        saddle_problem = dsp.SaddlePointProblem(
             dsp.MinimizeMaximize(phi - lambda_val * Delta),
             weight_constraints + exponent_constraints,
         )
