@@ -1,4 +1,4 @@
-def test_dspp_construction() -> None:
+def test_dsp_construction() -> None:
     # Setup ###
     import numpy as np
 
@@ -7,7 +7,7 @@ def test_dspp_construction() -> None:
 
     # Snippet start ###
     import cvxpy as cp
-    import dspp
+    import dsp
 
     y = cp.Variable(T)
     s = cp.Variable(n)
@@ -21,7 +21,7 @@ def test_dspp_construction() -> None:
                 exponents.append(-(t + 1) * (y[t] + s[i]))
                 weights.append(h[i] * C[i, t])
 
-    Delta = dspp.weighted_log_sum_exp(cp.hstack(exponents), cp.hstack(weights))
+    Delta = dsp.weighted_log_sum_exp(cp.hstack(exponents), cp.hstack(weights))
 
     # Define phi, lamb, H, U ###
     phi = cp.norm1(h - np.ones(n) / n)
@@ -30,11 +30,11 @@ def test_dspp_construction() -> None:
     U = [0 <= y, y <= 0.2, 0 <= s, s <= 0.01]
     # ###
 
-    obj = dspp.MinimizeMaximize(phi - lamb * Delta)
+    obj = dsp.MinimizeMaximize(phi - lamb * Delta)
 
     constraints = H + U
 
-    saddle_problem = dspp.SaddleProblem(obj, constraints)
+    saddle_problem = dsp.SaddlePointProblem(obj, constraints)
     saddle_problem.solve()
 
     # Snippet end ###
