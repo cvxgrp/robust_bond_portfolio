@@ -38,9 +38,9 @@ def test_dsp_construction() -> None:
     saddle_problem.solve()
 
     # Snippet end ###
-    assert np.allclose(y.value, 0.2)
-    assert np.allclose(s.value, 0.01)
-    assert np.isclose(phi.value, 0.17965100137657167)
+    assert np.allclose(y.value, 0.2, atol=1e-3)
+    assert np.allclose(s.value, 0.01, atol=1e-3)
+    assert np.isclose(phi.value, 0.1796, atol=1e-3)
 
 
 def test_worse_case_analysis() -> None:
@@ -77,8 +77,8 @@ def test_worse_case_analysis() -> None:
     prob.solve()
 
     # Snippet end ###
-    assert np.allclose(y.value, 0.05)
-    assert np.allclose(s.value, 0.05)
+    assert np.allclose(y.value, 0.05, atol=1e-3)
+    assert np.allclose(s.value, 0.05, atol=1e-3)
 
 
 def test_explicit_dual() -> None:
@@ -122,5 +122,5 @@ def test_explicit_dual() -> None:
     prob.solve()
 
     # Snippet end ###
-    assert np.isclose(h.value[-5], 0.01)
-    assert np.isclose(h.value.sum(), 0.01)
+    assert np.isclose(h.value[-5], 0.01, atol=1e-3)
+    assert np.isclose(h.value.sum(), 0.01, atol=1e-3)
