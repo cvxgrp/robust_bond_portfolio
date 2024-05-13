@@ -27,11 +27,14 @@ All code snippets presented in the paper are maintained as test cases is `tests/
 If you want to reference our paper in your research, please consider citing us by using the following BibTeX:
 
 ```BibTeX
-@misc{luxenberg2022robustbond,
-  author = {Luxenberg, Eric and Schiele, Philipp and Boyd, Stephen},
-  doi = {10.48550/ARXIV.2212.02570},
+@article{luxenberg2024robustbond,
   title = {Robust Bond Portfolio Construction via Convex-Concave Saddle Point Optimization},
-  url = {https://arxiv.org/abs/2212.02570},
-  year = {2022}
+  author = {Luxenberg, Eric and Schiele, Philipp and Boyd, Stephen},
+  journal = {Journal of Optimization Theory and Applications},
+  pages = {1--27},
+  year = {2024},
+  doi = {https://doi.org/10.1007/s10957-024-02436-z},
+  publisher = {Springer},
+  pdf = {https://web.stanford.edu/\%7Eboyd/papers/pdf/robust_bond_portfolio.pdf}
 }
 ```
